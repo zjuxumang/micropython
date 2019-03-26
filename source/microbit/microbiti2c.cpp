@@ -64,7 +64,6 @@ STATIC mp_obj_t microbit_i2c_init(mp_uint_t n_args, const mp_obj_t *pos_args, mp
 
     // Call underlying mbed i2c_reset to reconfigure the pins and reset the peripheral
     i2c_reset(self->i2c->get_i2c_obj());
-
     return mp_const_none;
 }
 MP_DEFINE_CONST_FUN_OBJ_KW(microbit_i2c_init_obj, 1, microbit_i2c_init);
