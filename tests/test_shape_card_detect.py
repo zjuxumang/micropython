@@ -2,7 +2,7 @@ from microbit import *
 from MuVisionSensor import *
 
 mu=MuVisionSensor(0x60)
-mu.begin(I2C)
+mu.begin()
 mu.VisionBegin(VISION_SHAPE_CARD_DETECT)
 while True:
     if mu.GetValue(VISION_SHAPE_CARD_DETECT,Status):

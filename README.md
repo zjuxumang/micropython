@@ -21,7 +21,7 @@ Then try:
     #初始化MuVisionSensor对象，默认I2C地址0x60
     >>> mu=MuVisionSensor(0x60)
     #启动模块
-    >>> mu.begin(I2C)
+    >>> mu.begin()
     #启动视觉算法
     >>> mu.VisionBegin(VISION_SHAPE_CARD_DETECT)
     #获取结果
@@ -34,6 +34,4 @@ Then try:
 ![image](https://raw.githubusercontent.com/zjuxumang/micropython/master/docs/MuEditor.png)
 
 - 形状卡片检测测试程序
-
 ./tests/test_shape_card_detect.py
-![test](https://raw.githubusercontent.com/zjuxumang/micropython/master/docs/test.png)
