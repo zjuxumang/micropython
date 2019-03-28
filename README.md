@@ -1,8 +1,8 @@
 MicroPython for the BBC micro:bit
 在官方runtime固件基础上增加了MuVisionSensor模块，适用于小Mu视觉传感器
+=============================================================
 - Beta v0.0.1
 - 暂不支持Serial模式
-=================================
 
 编译方法参考官方文档 https://github.com/bbcmicrobit/micropython
 
@@ -30,7 +30,7 @@ Then try:
 在Mu Editor中使用该固件的方法
 ==========================
 添加microbit-micropython.hex的路径,替换默认固件
-![image](https:/raw.githubusercontent.com/zjuxumang/micropython/master/docs/Mu%2520Editor.png)
+![image](https:/raw.githubusercontent.com/zjuxumang/micropython/master/docs/MuEditor.png)
 
 形状卡片检测测试程序
 ./tests/test_shape_card_detect.py
