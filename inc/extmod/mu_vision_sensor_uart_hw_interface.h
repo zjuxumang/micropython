@@ -16,7 +16,7 @@
 #define ARDUINO_LIB_MUVISIONSENSOR_SRC_MU_VISION_SENSOR_UART_HW_INTERFACE_H_
 
 #include "mu_vision_sensor_uart_interface.h"
-#include "MicroBit.h"
+#include "yotta_modules/microbit-dal/inc/drivers/MicroBitSerial.h"
 
 typedef MicroBitSerial MuVsUart;
 

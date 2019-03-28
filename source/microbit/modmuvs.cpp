@@ -24,6 +24,8 @@
  * THE SOFTWARE.
  */
 #include "microbit/microbitdal.h"
+#include "yotta_modules/microbit-dal/inc/drivers/MicroBitSerial.h"
+
 
 extern "C" {
 
@@ -34,7 +36,8 @@ extern "C" {
 #include "microbit/modmicrobit.h"
 #include "extmod/MuVisionSensor.h"
 
-#define Debug 1
+#define Debug 0
+
 // class MuVisionSensor(object):
 typedef struct _mp_obj_MuVisionSensor_t {
     mp_obj_base_t base;
@@ -301,22 +304,16 @@ STATIC mp_obj_t mod_muvs_MuVisionSensor_make_new(const mp_obj_type_t *type, size
 }
 
 // def MuVisionSensor.begin(self, communication_port, mode)
-STATIC mp_obj_t mod_muvs_MuVisionSensor_begin(mp_obj_t self, mp_obj_t mode) {
+STATIC mp_obj_t mod_muvs_MuVisionSensor_begin(mp_obj_t self) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
 #if Debug
 
 #endif
-    int mode_ = mp_obj_get_int(mode);
-    if(MuVsMode(mode_)==kSerialMode)
-        ;
-    else if(MuVsMode(mode_)==kI2CMode)
-        p->Mu->begin(&ubit_i2c, MuVsMode(mode_));
-    else
-        printf("error mode,please use Serial or I2C");
+    p->Mu->begin(&ubit_i2c, kI2CMode);
     return mp_const_none;
 }
-STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_begin_obj, mod_muvs_MuVisionSensor_begin);
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(mod_muvs_MuVisionSensor_begin_obj, mod_muvs_MuVisionSensor_begin);
 
 // def MuVisionSensor.read(self, vision_type, object_inf, result_num=1)
 STATIC mp_obj_t mod_muvs_MuVisionSensor_read(size_t n_args, const mp_obj_t *args) {
@@ -397,8 +394,8 @@ STATIC const mp_obj_type_t mod_muvs_MuVisionSensor_type = {
 STATIC const mp_rom_map_elem_t mp_module_muvs_globals_table[] = {
     { MP_ROM_QSTR(MP_QSTR___name__), MP_ROM_QSTR(MP_QSTR_MuVisionSensor) },
     { MP_ROM_QSTR(MP_QSTR_MuVisionSensor), MP_ROM_PTR(&mod_muvs_MuVisionSensor_type) },
-    { MP_ROM_QSTR(MP_QSTR_I2C), MP_ROM_INT(1) },
-    { MP_ROM_QSTR(MP_QSTR_Serial), MP_ROM_INT(0) },
+    // { MP_ROM_QSTR(MP_QSTR_I2C), MP_ROM_INT(1) },
+    // { MP_ROM_QSTR(MP_QSTR_Serial), MP_ROM_INT(0) },
     { MP_ROM_QSTR(MP_QSTR_VISION_COLOR_DETECT), MP_ROM_INT(1) },
     { MP_ROM_QSTR(MP_QSTR_VISION_COLOR_RECOGNITION), MP_ROM_INT(2) },
     { MP_ROM_QSTR(MP_QSTR_VISION_BALL_DETECT), MP_ROM_INT(4) },

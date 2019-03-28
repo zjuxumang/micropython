@@ -57,7 +57,6 @@ uint8_t MuVisionSensor::begin(void* communication_port,
       return MU_ERROR_UNSUPPROT_PROTOCOL;
     }
   }
-  printf("protocol version:%d\r\n",protocol_version);
   return MU_OK;
 }
 
