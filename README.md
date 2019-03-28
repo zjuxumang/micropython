@@ -1,79 +1,37 @@
 MicroPython for the BBC micro:bit
+在官方runtime固件基础上增加了MuVisionSensor模块，适用于小Mu视觉传感器
+- Beta v0.0.1
+- 暂不支持Serial模式
 =================================
 
-This is the source code for MicroPython running on the BBC micro:bit!
-
-To get involved with the micro:bit community join the Slack channel by signing up here:
-https://tech.microbit.org/get-involved/where-to-find/
-
-Various things are in this repository, including:
-- Source code in source/ and inc/ directories.
-- Example Python programs in the examples/ directory.
-- Tools in the tools/ directory.
-
-The source code is a yotta application and needs yotta to build, along
-with an ARM compiler toolchain (eg arm-none-eabi-gcc and friends).
-
-Ubuntu users can install the needed packages using:
-```
-sudo add-apt-repository -y ppa:team-gcc-arm-embedded
-sudo add-apt-repository -y ppa:pmiller-opensource/ppa
-sudo apt-get update
-sudo apt-get install cmake ninja-build gcc-arm-none-eabi srecord libssl-dev
-pip3 install yotta
-```
-
-Once all packages are installed, use yotta and the provided Makefile to build.
-You might need need an Arm Mbed account to complete some of the yotta commands,
-if so, you could be prompted to create one as a part of the process.
-
-- Use target bbc-microbit-classic-gcc-nosd:
-
-  ```
-  yt target bbc-microbit-classic-gcc-nosd
-  ```
-
-- Run yotta update to fetch remote assets:
-
-  ```
-  yt up
-  ```
-
-- Start the build:
-
-  ```
-  make all
-  ```
-
-The resulting firmware.hex file to flash onto the device can be
-found in the build/ directory from the root of the repository.
-
-The Makefile provided does some extra preprocessing of the source,
-adds version information to the UICR region, puts the resulting
-firmware at build/firmware.hex, and includes some convenience targets.
+编译方法参考官方文档 https://github.com/bbcmicrobit/micropython
 
 How to use
 ==========
+
+将microbit-micropython.hex上传到microbit，随后用终端工具（putty/picocom等等）打开对应的端口
 
 Upon reset you will have a REPL on the USB CDC serial port, with baudrate
 115200 (eg picocom /dev/ttyACM0 -b 115200).
 
 Then try:
 
-    >>> import microbit
-    >>> microbit.display.scroll('hello!')
-    >>> microbit.button_a.is_pressed()
-    >>> dir(microbit)
+    #导入MuVisionSensor模块
+    >>> from MuVisionSensor import *
+    #初始化MuVisionSensor对象，默认I2C地址0x60
+    >>> mu=MuVisionSensor(0x60)
+    #启动模块
+    >>> mu.begin(I2C)
+    #启动视觉算法
+    >>> mu.VisionBegin(VISION_SHAPE_CARD_DETECT)
+    #获取结果
+    >>> ret = mu.GetValue(VISION_SHAPE_CARD_DETECT,Status)
 
-Tab completion works and is very useful!
+在Mu Editor中使用该固件的方法
+==========================
+添加microbit-micropython.hex的路径,替换默认固件
+![image](https:/raw.githubusercontent.com/zjuxumang/micropython/master/docs/Mu%2520Editor.png)
 
-Read our documentation here:
-
-https://microbit-micropython.readthedocs.io/en/latest/
-
-You can also use the tools/pyboard.py script to run Python scripts directly
-from your PC, eg:
-
-    $ ./tools/pyboard.py /dev/ttyACM0 examples/conway.py
-
-Be brave! Break things! Learn and have fun!
+形状卡片检测测试程序
+./tests/test_shape_card_detect.py
+![test](https://raw.githubusercontent.com/zjuxumang/micropython/master/docs/test.png)
