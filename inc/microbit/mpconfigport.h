@@ -134,7 +134,7 @@ extern const struct _mp_obj_module_t mp_module_muvs;
     { MP_ROM_QSTR(MP_QSTR_speech), MP_ROM_PTR(&speech_module) }, \
     { MP_ROM_QSTR(MP_QSTR_utime), MP_ROM_PTR(&utime_module) }, \
     { MP_ROM_QSTR(MP_QSTR_machine), MP_ROM_PTR(&machine_module) }, \
-    { MP_ROM_QSTR(MP_QSTR_muvs), MP_ROM_PTR(&mp_module_muvs) }, \
+    { MP_ROM_QSTR(MP_QSTR_MuVisionSensor), MP_ROM_PTR(&mp_module_muvs) }, \
     \
     /* the following provide aliases for existing modules */ \
     { MP_ROM_QSTR(MP_QSTR_collections), MP_ROM_PTR(&mp_module_collections) }, \

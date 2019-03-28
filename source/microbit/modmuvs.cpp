@@ -42,43 +42,51 @@ typedef struct _mp_obj_MuVisionSensor_t {
     MuVisionSensor *Mu;
 } mp_obj_MuVisionSensor_t;
 
-
-// def MuVisionSensor.CameraGetAwb(self, awb)
-STATIC mp_obj_t mod_muvs_MuVisionSensor_CameraGetAwb(mp_obj_t self, mp_obj_t awb) {
+// def MuVisionSensor.CameraGetAwb(self)
+STATIC mp_obj_t mod_muvs_MuVisionSensor_CameraGetAwb(mp_obj_t self) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
-    return mp_const_none;
+    int ret = p->Mu->CameraGetAwb();
+    mp_obj_t ret_obj = mp_obj_new_int(ret);
+    return ret_obj;
 }
-STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_CameraGetAwb_obj, mod_muvs_MuVisionSensor_CameraGetAwb);
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(mod_muvs_MuVisionSensor_CameraGetAwb_obj, mod_muvs_MuVisionSensor_CameraGetAwb);
 
-// def MuVisionSensor.CameraGetFPS(self, fps)
-STATIC mp_obj_t mod_muvs_MuVisionSensor_CameraGetFPS(mp_obj_t self, mp_obj_t fps) {
+// def MuVisionSensor.CameraGetFPS(self)
+STATIC mp_obj_t mod_muvs_MuVisionSensor_CameraGetFPS(mp_obj_t self) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
-    return mp_const_none;
+    int ret = p->Mu->CameraGetFPS();
+    mp_obj_t ret_obj = mp_obj_new_int(ret);
+    return ret_obj;
 }
-STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_CameraGetFPS_obj, mod_muvs_MuVisionSensor_CameraGetFPS);
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(mod_muvs_MuVisionSensor_CameraGetFPS_obj, mod_muvs_MuVisionSensor_CameraGetFPS);
 
 // def MuVisionSensor.CameraGetRotate(self, enable)
-STATIC mp_obj_t mod_muvs_MuVisionSensor_CameraGetRotate(mp_obj_t self, mp_obj_t enable) {
+STATIC mp_obj_t mod_muvs_MuVisionSensor_CameraGetRotate(mp_obj_t self) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
-    return mp_const_none;
+    int ret = p->Mu->CameraGetRotate();
+    mp_obj_t ret_obj = mp_obj_new_int(ret);
+    return ret_obj;
 }
-STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_CameraGetRotate_obj, mod_muvs_MuVisionSensor_CameraGetRotate);
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(mod_muvs_MuVisionSensor_CameraGetRotate_obj, mod_muvs_MuVisionSensor_CameraGetRotate);
 
 // def MuVisionSensor.CameraGetZoom(self, zoom)
-STATIC mp_obj_t mod_muvs_MuVisionSensor_CameraGetZoom(mp_obj_t self, mp_obj_t zoom) {
+STATIC mp_obj_t mod_muvs_MuVisionSensor_CameraGetZoom(mp_obj_t self) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
-    return mp_const_none;
+    int ret = p->Mu->CameraGetZoom();
+    mp_obj_t ret_obj = mp_obj_new_int(ret);
+    return ret_obj;
 }
-STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_CameraGetZoom_obj, mod_muvs_MuVisionSensor_CameraGetZoom);
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(mod_muvs_MuVisionSensor_CameraGetZoom_obj, mod_muvs_MuVisionSensor_CameraGetZoom);
 
 // def MuVisionSensor.CameraSetAwb(self, awb)
 STATIC mp_obj_t mod_muvs_MuVisionSensor_CameraSetAwb(mp_obj_t self, mp_obj_t awb) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
+    p->Mu->CameraSetAwb(MuVsCameraWhiteBalance(mp_obj_get_int(awb)));
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_CameraSetAwb_obj, mod_muvs_MuVisionSensor_CameraSetAwb);
@@ -87,6 +95,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_CameraSetAwb_obj, mod_m
 STATIC mp_obj_t mod_muvs_MuVisionSensor_CameraSetFPS(mp_obj_t self, mp_obj_t fps) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
+    p->Mu->CameraSetFPS(MuVsCameraFPS(mp_obj_get_int(fps)));
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_CameraSetFPS_obj, mod_muvs_MuVisionSensor_CameraSetFPS);
@@ -95,6 +104,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_CameraSetFPS_obj, mod_m
 STATIC mp_obj_t mod_muvs_MuVisionSensor_CameraSetRotate(mp_obj_t self, mp_obj_t enable) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
+    p->Mu->CameraSetRotate((bool)mp_obj_get_int(enable));
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_CameraSetRotate_obj, mod_muvs_MuVisionSensor_CameraSetRotate);
@@ -103,6 +113,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_CameraSetRotate_obj, mo
 STATIC mp_obj_t mod_muvs_MuVisionSensor_CameraSetZoom(mp_obj_t self, mp_obj_t zoom) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
+    p->Mu->CameraSetZoom(MuVsCameraZoom(mp_obj_get_int(zoom)));
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_CameraSetZoom_obj, mod_muvs_MuVisionSensor_CameraSetZoom);
@@ -111,14 +122,18 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_CameraSetZoom_obj, mod_
 STATIC mp_obj_t mod_muvs_MuVisionSensor_GetValue(mp_obj_t self, mp_obj_t vision_type, mp_obj_t object_inf) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
-    return mp_const_none;
+    int ret = p->Mu->GetValue(mp_obj_get_int(vision_type),MuVsObjectInf(mp_obj_get_int(object_inf)));
+    mp_obj_t ret_obj = mp_obj_new_int(ret);
+    return ret_obj;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_3(mod_muvs_MuVisionSensor_GetValue_obj, mod_muvs_MuVisionSensor_GetValue);
 
 // def MuVisionSensor.LEDsetColor(self, led, detected_color, undetected_color, level)
 STATIC mp_obj_t mod_muvs_MuVisionSensor_LEDsetColor(size_t n_args, const mp_obj_t *args) {
     // TODO
-    mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
+    mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)args[0];
+    p->Mu->LedSetColor(MuVsLed(mp_obj_get_int(args[1])),MuVsLedColor(mp_obj_get_int(args[2])),
+                        MuVsLedColor(mp_obj_get_int(args[3])),mp_obj_get_int(args[4]));
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mod_muvs_MuVisionSensor_LEDsetColor_obj, 5, 5, mod_muvs_MuVisionSensor_LEDsetColor);
@@ -126,7 +141,8 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mod_muvs_MuVisionSensor_LEDsetColor_o
 // def MuVisionSensor.LEDsetMode(self, led, manual, hold)
 STATIC mp_obj_t mod_muvs_MuVisionSensor_LEDsetMode(size_t n_args, const mp_obj_t *args) {
     // TODO
-    mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
+    mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)args[0];
+    p->Mu->LedSetMode(MuVsLed(mp_obj_get_int(args[1])),bool(mp_obj_get_int(args[2])),bool(mp_obj_get_int(args[3])));
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mod_muvs_MuVisionSensor_LEDsetMode_obj, 4, 4, mod_muvs_MuVisionSensor_LEDsetMode);
@@ -135,6 +151,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mod_muvs_MuVisionSensor_LEDsetMode_ob
 STATIC mp_obj_t mod_muvs_MuVisionSensor_SensorSetDefault(mp_obj_t self) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
+    p->Mu->SensorSetDefault();
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(mod_muvs_MuVisionSensor_SensorSetDefault_obj, mod_muvs_MuVisionSensor_SensorSetDefault);
@@ -143,6 +160,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(mod_muvs_MuVisionSensor_SensorSetDefault_obj, m
 STATIC mp_obj_t mod_muvs_MuVisionSensor_SensorSetRestart(mp_obj_t self) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
+    p->Mu->SensorSetRestart();
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(mod_muvs_MuVisionSensor_SensorSetRestart_obj, mod_muvs_MuVisionSensor_SensorSetRestart);
@@ -151,6 +169,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(mod_muvs_MuVisionSensor_SensorSetRestart_obj, m
 STATIC mp_obj_t mod_muvs_MuVisionSensor_SetValue(size_t n_args, const mp_obj_t *args) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)args[0];
+    p->Mu->SetValue(mp_obj_get_int(args[1]),MuVsObjectInf(mp_obj_get_int(args[2])),mp_obj_get_int(args[3]));
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mod_muvs_MuVisionSensor_SetValue_obj, 4, 4, mod_muvs_MuVisionSensor_SetValue);
@@ -159,6 +178,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mod_muvs_MuVisionSensor_SetValue_obj,
 STATIC mp_obj_t mod_muvs_MuVisionSensor_UartSetBaudrate(mp_obj_t self, mp_obj_t baudrate) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
+    p->Mu->UartSetBaudrate(MuVsBaudrate(mp_obj_get_int(baudrate)));
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_UartSetBaudrate_obj, mod_muvs_MuVisionSensor_UartSetBaudrate);
@@ -167,6 +187,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_UartSetBaudrate_obj, mo
 STATIC mp_obj_t mod_muvs_MuVisionSensor_UpdateResult(mp_obj_t self, mp_obj_t vision_type, mp_obj_t wait_all_result) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
+    p->Mu->UpdateResult(mp_obj_get_int(vision_type));
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_3(mod_muvs_MuVisionSensor_UpdateResult_obj, mod_muvs_MuVisionSensor_UpdateResult);
@@ -175,6 +196,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_3(mod_muvs_MuVisionSensor_UpdateResult_obj, mod_m
 STATIC mp_obj_t mod_muvs_MuVisionSensor_VisionBegin(mp_obj_t self, mp_obj_t vision_type) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
+    p->Mu->VisionBegin(mp_obj_get_int(vision_type));
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_VisionBegin_obj, mod_muvs_MuVisionSensor_VisionBegin);
@@ -183,6 +205,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_VisionBegin_obj, mod_mu
 STATIC mp_obj_t mod_muvs_MuVisionSensor_VisionEnd(mp_obj_t self, mp_obj_t vision_type) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
+    p->Mu->VisionEnd(mp_obj_get_int(vision_type));
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_VisionEnd_obj, mod_muvs_MuVisionSensor_VisionEnd);
@@ -191,7 +214,9 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_VisionEnd_obj, mod_muvs
 STATIC mp_obj_t mod_muvs_MuVisionSensor_VisionGetLevel(mp_obj_t self, mp_obj_t vision_type) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
-    return mp_const_none;
+    int ret = p->Mu->VisionGetLevel(mp_obj_get_int(vision_type));
+    mp_obj_t ret_obj = mp_obj_new_int(ret);
+    return ret_obj;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_VisionGetLevel_obj, mod_muvs_MuVisionSensor_VisionGetLevel);
 
@@ -199,7 +224,9 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_VisionGetLevel_obj, mod
 STATIC mp_obj_t mod_muvs_MuVisionSensor_VisionGetOutputMode(mp_obj_t self) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
-    return mp_const_none;
+    int ret = p->Mu->VisionGetOutputMode();
+    mp_obj_t ret_obj = mp_obj_new_int(ret);
+    return ret_obj;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(mod_muvs_MuVisionSensor_VisionGetOutputMode_obj, mod_muvs_MuVisionSensor_VisionGetOutputMode);
 
@@ -207,7 +234,9 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(mod_muvs_MuVisionSensor_VisionGetOutputMode_obj
 STATIC mp_obj_t mod_muvs_MuVisionSensor_VisionGetStatus(mp_obj_t self, mp_obj_t vision_type) {
     // TODO
     mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)self;
-    return mp_const_none;
+    int ret = p->Mu->VisionGetStatus(mp_obj_get_int(vision_type));
+    mp_obj_t ret_obj = mp_obj_new_int(ret);
+    return ret_obj;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_VisionGetStatus_obj, mod_muvs_MuVisionSensor_VisionGetStatus);
 
@@ -262,14 +291,12 @@ STATIC mp_obj_t mod_muvs_MuVisionSensor_make_new(const mp_obj_type_t *type, size
     mp_obj_MuVisionSensor_t *o = m_new_obj(mp_obj_MuVisionSensor_t);
     o->base.type = type;
     o->address_ = address;
-    MuVisionSensor Mu0(0x60);
+    MuVisionSensor *Mu = new MuVisionSensor(address);
 #if Debug
-    printf("Mu0 address:0x%x\r\n",&Mu0);
-    printf("Mu0 size:%d bytes\r\n",sizeof(Mu0));
+
 #endif
-    o->Mu = &Mu0;
-    o->Mu->begin(&ubit_i2c, kI2CMode);
-    o->Mu->VisionBegin(VISION_SHAPE_CARD_DETECT);
+    o->Mu = Mu;
+    // o->Mu->VisionBegin(VISION_SHAPE_CARD_DETECT);
     return MP_OBJ_FROM_PTR(o);
 }
 
@@ -280,8 +307,13 @@ STATIC mp_obj_t mod_muvs_MuVisionSensor_begin(mp_obj_t self, mp_obj_t mode) {
 #if Debug
 
 #endif
-    uint8_t version=ubit_i2c.readRegister(0x60<<1,0x01);
-    printf("version:%d\r\n",version);
+    int mode_ = mp_obj_get_int(mode);
+    if(MuVsMode(mode_)==kSerialMode)
+        ;
+    else if(MuVsMode(mode_)==kI2CMode)
+        p->Mu->begin(&ubit_i2c, MuVsMode(mode_));
+    else
+        printf("error mode,please use Serial or I2C");
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_begin_obj, mod_muvs_MuVisionSensor_begin);
@@ -289,6 +321,8 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(mod_muvs_MuVisionSensor_begin_obj, mod_muvs_MuV
 // def MuVisionSensor.read(self, vision_type, object_inf, result_num=1)
 STATIC mp_obj_t mod_muvs_MuVisionSensor_read(size_t n_args, const mp_obj_t *args) {
     // TODO
+    mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)args[0];
+    p->Mu->read(mp_obj_get_int(args[1]),MuVsObjectInf(mp_obj_get_int(args[2])),mp_obj_get_int(args[3]));
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mod_muvs_MuVisionSensor_read_obj, 3, 4, mod_muvs_MuVisionSensor_read);
@@ -296,6 +330,8 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mod_muvs_MuVisionSensor_read_obj, 3, 
 // def MuVisionSensor.write(self, vision_type, object_inf, value)
 STATIC mp_obj_t mod_muvs_MuVisionSensor_write(size_t n_args, const mp_obj_t *args) {
     // TODO
+    mp_obj_MuVisionSensor_t *p=(mp_obj_MuVisionSensor_t*)args[0];
+    p->Mu->write(mp_obj_get_int(args[1]),MuVsObjectInf(mp_obj_get_int(args[2])),mp_obj_get_int(args[3]));
     return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_VAR_BETWEEN(mod_muvs_MuVisionSensor_write_obj, 4, 4, mod_muvs_MuVisionSensor_write);
@@ -359,18 +395,83 @@ STATIC const mp_obj_type_t mod_muvs_MuVisionSensor_type = {
 // module stuff
 
 STATIC const mp_rom_map_elem_t mp_module_muvs_globals_table[] = {
-    { MP_ROM_QSTR(MP_QSTR___name__), MP_ROM_QSTR(MP_QSTR_muvs) },
+    { MP_ROM_QSTR(MP_QSTR___name__), MP_ROM_QSTR(MP_QSTR_MuVisionSensor) },
     { MP_ROM_QSTR(MP_QSTR_MuVisionSensor), MP_ROM_PTR(&mod_muvs_MuVisionSensor_type) },
     { MP_ROM_QSTR(MP_QSTR_I2C), MP_ROM_INT(1) },
     { MP_ROM_QSTR(MP_QSTR_Serial), MP_ROM_INT(0) },
     { MP_ROM_QSTR(MP_QSTR_VISION_COLOR_DETECT), MP_ROM_INT(1) },
     { MP_ROM_QSTR(MP_QSTR_VISION_COLOR_RECOGNITION), MP_ROM_INT(2) },
-    { MP_ROM_QSTR(MP_QSTR_VISION_BALL_DETECT), MP_ROM_INT(3) },
-    { MP_ROM_QSTR(MP_QSTR_VISION_BODY_DETECT), MP_ROM_INT(4) },
-    { MP_ROM_QSTR(MP_QSTR_VISION_SHAPE_CARD_DETECT), MP_ROM_INT(5) },
-    { MP_ROM_QSTR(MP_QSTR_VISION_TRAFFIC_CARD_DETECT), MP_ROM_INT(6) },
-    { MP_ROM_QSTR(MP_QSTR_VISION_NUM_CARD_DETECT), MP_ROM_INT(7) },
-    { MP_ROM_QSTR(MP_QSTR_VISION_ALL), MP_ROM_INT(8) },
+    { MP_ROM_QSTR(MP_QSTR_VISION_BALL_DETECT), MP_ROM_INT(4) },
+    { MP_ROM_QSTR(MP_QSTR_VISION_BODY_DETECT), MP_ROM_INT(16) },
+    { MP_ROM_QSTR(MP_QSTR_VISION_SHAPE_CARD_DETECT), MP_ROM_INT(32) },
+    { MP_ROM_QSTR(MP_QSTR_VISION_TRAFFIC_CARD_DETECT), MP_ROM_INT(64) },
+    { MP_ROM_QSTR(MP_QSTR_VISION_NUM_CARD_DETECT), MP_ROM_INT(128) },
+    { MP_ROM_QSTR(MP_QSTR_VISION_ALL), MP_ROM_INT(255) },
+    { MP_ROM_QSTR(MP_QSTR_Baud9600), MP_ROM_INT(0) },                     
+    { MP_ROM_QSTR(MP_QSTR_Baud19200), MP_ROM_INT(1) },                    
+    { MP_ROM_QSTR(MP_QSTR_Baud38400), MP_ROM_INT(2) },                    
+    { MP_ROM_QSTR(MP_QSTR_Baud57600), MP_ROM_INT(3) },                    
+    { MP_ROM_QSTR(MP_QSTR_Baud115200), MP_ROM_INT(4) },                   
+    { MP_ROM_QSTR(MP_QSTR_Baud230400), MP_ROM_INT(5) },                   
+    { MP_ROM_QSTR(MP_QSTR_Baud460800), MP_ROM_INT(6) },                   
+    { MP_ROM_QSTR(MP_QSTR_Baud921600), MP_ROM_INT(7) },                   
+    { MP_ROM_QSTR(MP_QSTR_Status), MP_ROM_INT(0) },                       
+    { MP_ROM_QSTR(MP_QSTR_XValue), MP_ROM_INT(1) },                       
+    { MP_ROM_QSTR(MP_QSTR_YValue), MP_ROM_INT(2) },                       
+    { MP_ROM_QSTR(MP_QSTR_WidthValue), MP_ROM_INT(3) },                   
+    { MP_ROM_QSTR(MP_QSTR_HeightValue), MP_ROM_INT(4) },                  
+    { MP_ROM_QSTR(MP_QSTR_Label), MP_ROM_INT(5) },                        
+    { MP_ROM_QSTR(MP_QSTR_RValue), MP_ROM_INT(6) },                       
+    { MP_ROM_QSTR(MP_QSTR_GValue), MP_ROM_INT(7) },                       
+    { MP_ROM_QSTR(MP_QSTR_BValue), MP_ROM_INT(8) },                       
+    { MP_ROM_QSTR(MP_QSTR_CallBackMode), MP_ROM_INT(0) },                 
+    { MP_ROM_QSTR(MP_QSTR_DataFlowMode), MP_ROM_INT(1) },                 
+    { MP_ROM_QSTR(MP_QSTR_EventMode), MP_ROM_INT(2) },                    
+    { MP_ROM_QSTR(MP_QSTR_ZoomDefault), MP_ROM_INT(0) },                  
+    { MP_ROM_QSTR(MP_QSTR_Zoom1), MP_ROM_INT(1) },                        
+    { MP_ROM_QSTR(MP_QSTR_Zoom2), MP_ROM_INT(2) },                        
+    { MP_ROM_QSTR(MP_QSTR_Zoom3), MP_ROM_INT(3) },                        
+    { MP_ROM_QSTR(MP_QSTR_Zoom4), MP_ROM_INT(4) },                        
+    { MP_ROM_QSTR(MP_QSTR_Zoom5), MP_ROM_INT(5) },                        
+    { MP_ROM_QSTR(MP_QSTR_FPSNormal), MP_ROM_INT(0) },                    
+    { MP_ROM_QSTR(MP_QSTR_FPSHigh), MP_ROM_INT(1) },                      
+    { MP_ROM_QSTR(MP_QSTR_AutoWhiteBalance), MP_ROM_INT(0) },             
+    { MP_ROM_QSTR(MP_QSTR_LockWhiteBalance), MP_ROM_INT(1) },             
+    { MP_ROM_QSTR(MP_QSTR_WhiteLight), MP_ROM_INT(2) },                   
+    { MP_ROM_QSTR(MP_QSTR_YellowLight), MP_ROM_INT(3) },                  
+    { MP_ROM_QSTR(MP_QSTR_LevelDefault), MP_ROM_INT(0) },                 
+    { MP_ROM_QSTR(MP_QSTR_LevelSpeed), MP_ROM_INT(1) },                   
+    { MP_ROM_QSTR(MP_QSTR_LevelBalance), MP_ROM_INT(2) },                 
+    { MP_ROM_QSTR(MP_QSTR_LevelAccuracy), MP_ROM_INT(3) },
+    { MP_ROM_QSTR(MP_QSTR_MU_SHAPE_CARD_TICK), MP_ROM_INT(1) },
+    { MP_ROM_QSTR(MP_QSTR_MU_SHAPE_CARD_CROSS), MP_ROM_INT(2) },
+    { MP_ROM_QSTR(MP_QSTR_MU_SHAPE_CARD_CIRCLE), MP_ROM_INT(3) },    
+    { MP_ROM_QSTR(MP_QSTR_MU_SHAPE_CARD_SQUARE), MP_ROM_INT(4) },    
+    { MP_ROM_QSTR(MP_QSTR_MU_SHAPE_CARD_TRIANGLE), MP_ROM_INT(5) },  
+    { MP_ROM_QSTR(MP_QSTR_MU_TRAFFIC_CARD_FORWARD), MP_ROM_INT(1) }, 
+    { MP_ROM_QSTR(MP_QSTR_MU_TRAFFIC_CARD_LEFT), MP_ROM_INT(2) },    
+    { MP_ROM_QSTR(MP_QSTR_MU_TRAFFIC_CARD_RIGHT), MP_ROM_INT(3) },   
+    { MP_ROM_QSTR(MP_QSTR_MU_TRAFFIC_CARD_TURN_AROUND), MP_ROM_INT(4) },  
+    { MP_ROM_QSTR(MP_QSTR_MU_TRAFFIC_CARD_PARK), MP_ROM_INT(5) },    
+    { MP_ROM_QSTR(MP_QSTR_MU_COLOR_UNKNOWN), MP_ROM_INT(1) },  
+    { MP_ROM_QSTR(MP_QSTR_MU_COLOR_BLACK), MP_ROM_INT(2) },    
+    { MP_ROM_QSTR(MP_QSTR_MU_COLOR_WHITE), MP_ROM_INT(3) },    
+    { MP_ROM_QSTR(MP_QSTR_MU_COLOR_RED), MP_ROM_INT(4) },
+    { MP_ROM_QSTR(MP_QSTR_MU_COLOR_YELLOW), MP_ROM_INT(5) },   
+    { MP_ROM_QSTR(MP_QSTR_MU_COLOR_GREEN), MP_ROM_INT(6) },    
+    { MP_ROM_QSTR(MP_QSTR_MU_COLOR_CYAN), MP_ROM_INT(7) },     
+    { MP_ROM_QSTR(MP_QSTR_MU_COLOR_BLUE), MP_ROM_INT(8) },     
+    { MP_ROM_QSTR(MP_QSTR_MU_COLOR_PURPLE), MP_ROM_INT(9) },   
+    { MP_ROM_QSTR(MP_QSTR_Led1), MP_ROM_INT(1) },  
+    { MP_ROM_QSTR(MP_QSTR_Led2), MP_ROM_INT(2) },  
+    { MP_ROM_QSTR(MP_QSTR_LedClose), MP_ROM_INT(1) },         
+    { MP_ROM_QSTR(MP_QSTR_LedRed), MP_ROM_INT(2) },
+    { MP_ROM_QSTR(MP_QSTR_LedGreen), MP_ROM_INT(3) },         
+    { MP_ROM_QSTR(MP_QSTR_LedYellow), MP_ROM_INT(4) },        
+    { MP_ROM_QSTR(MP_QSTR_LedBlue), MP_ROM_INT(5) },          
+    { MP_ROM_QSTR(MP_QSTR_LedPurple), MP_ROM_INT(6) },        
+    { MP_ROM_QSTR(MP_QSTR_LedCyan), MP_ROM_INT(7) },          
+    { MP_ROM_QSTR(MP_QSTR_LedWhite), MP_ROM_INT(8) },         
 
 };
 STATIC MP_DEFINE_CONST_DICT(mp_module_muvs_globals, mp_module_muvs_globals_table);

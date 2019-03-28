@@ -1,5 +1,6 @@
 {
     "files.associations": {
         "machine_mem.h": "c"
-    }
+    },
+    "python.linting.pylintEnabled": true
 }

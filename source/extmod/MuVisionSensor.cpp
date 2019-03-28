@@ -29,7 +29,6 @@ uint8_t MuVisionSensor::begin(void* communication_port,
     mu_vs_method = nullptr;
   }
   mode_ = mode;
-  printf("switch");
   switch (mode) {
     case kSerialMode:
       if (mu_vs_method == nullptr) {
@@ -38,7 +37,6 @@ uint8_t MuVisionSensor::begin(void* communication_port,
       }
       break;
     case kI2CMode:
-      printf("I2CMode\r\n");
       if (mu_vs_method == nullptr) {
         mu_vs_method = new MuVisionSensorI2C((MuVsI2C *)communication_port,
                                               address_);
@@ -59,8 +57,7 @@ uint8_t MuVisionSensor::begin(void* communication_port,
       return MU_ERROR_UNSUPPROT_PROTOCOL;
     }
   }
-  printf("error count:%d\r\n",err_count);
-  printf("version:%d\r\n",protocol_version);
+  printf("protocol version:%d\r\n",protocol_version);
   return MU_OK;
 }
 
@@ -68,13 +65,10 @@ uint8_t MuVisionSensor::begin(void* communication_port,
 uint8_t MuVisionSensor::VisionBegin(MuVisionType vision_type) {
   mu_err_t err;
   err = VisionSetDefault(vision_type);
-  printf("err:%d\r\n",err);
   if (err) return err;
   err = VisionSetStatus(vision_type, true);
-  printf("err:%d\r\n",err);
   if (err) return err;
   err = VisionSetOutputMode(kCallBackMode);
-  printf("err:%d\r\n",err);
   if (err) return err;
   return MU_OK;
 }
